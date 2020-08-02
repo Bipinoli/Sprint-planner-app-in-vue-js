@@ -1,0 +1,69 @@
+.sprint-story {
+    margin-bottom: 10px;
+}
+
+.sprint-content {
+    padding: 15px;
+}
+
+.urgency-meter {
+    width: 100%;
+    height: 6px;
+    background-color: red;   
+}
+
+.sprint-metrics {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sprint-num-assignee {
+    display: flex;
+    flex-direction: row;
+}
+
+.sprint-assignee {
+    display: flex;
+    align-items: center;
+}
+
+.sprint-assignee img {
+    width: 2em;
+    border-radius: 50%;
+}
+
+.sprint-points {
+    background-color: #e9e9e9;
+    padding: 2px;
+    width: 2em;
+    margin: 4px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+}
+
+.sprint-tag {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    background-color: orange;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: small;
+    width: fit-content;
+}
+
+.sprint-number {
+    font-weight: bolder;
+    margin: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.sprint-title {
+    font-size: large;
+}
