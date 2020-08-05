@@ -1,5 +1,5 @@
 Vue.component("sprint-section", {
-    props: [title, stories],
+    props: ['title', 'stories'],
     template: `
         <div class="sprint-section column card">
             <header class="card-header">
@@ -8,8 +8,11 @@ Vue.component("sprint-section", {
                 </p>
             </header>
             <div class="card-content">
-               <div class="card drop-area" ondragover="allowDrag(event)" ondrop="drop(event)" _allowsdrop="true" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
-               <slot></slot>
+               <template v-for="story in stories">
+                    <div class="drop-area" ondragover="allowDrag(event)" ondrop="drop(event)" _allowsdrop="true" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+                    <sprint-story :title="story['title']" :urgency="story['urgency']"></sprint-story>
+               </template>
+               <div class="drop-area" ondragover="allowDrag(event)" ondrop="drop(event)" _allowsdrop="true" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
             </div>
         </div>
     `,

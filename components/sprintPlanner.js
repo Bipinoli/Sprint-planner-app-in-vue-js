@@ -1,14 +1,3 @@
-var sprintPlanner = new Vue({
-    el: '#sprint-planner',
-    data: {
-        'back-log': backLog,
-        'todo': backLog,
-        'in-progress': backLog,
-        // 'ready-4-acceptance': [],
-        // 'completed': [],
-    },
-});
-
 var backLog = [
     {
         'urgency': 'normal',
@@ -32,3 +21,27 @@ var backLog = [
         'points': 1
     },
 ];
+
+
+var sprintPlanner = new Vue({
+    el: '#sprint-planner',
+    data: {
+        'sections': [
+            {
+                'name': 'back-log',
+                'content': backLog
+            },
+            {
+                'name': 'todo',
+                'content': backLog
+            },
+            {
+                'name': 'in-progress',
+                'content': backLog
+            },
+        ]
+       
+        // 'ready-4-acceptance': [],
+        // 'completed': [],
+    },
+});

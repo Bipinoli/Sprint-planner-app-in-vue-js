@@ -14,10 +14,12 @@
 </head>
 <body>
     <div id="sprint-planner" class="columns">
-        <sprint-section title="back-log" :stories="backLog"></sprint-section>
+        <template v-for="section in sections">
+            <sprint-section :title="section['name']" :stories="section['content']"></sprint-section>
+        </template>
+        <!-- <sprint-section title="back-log" :stories="backLog"></sprint-section> -->
     </div>
-
-
+      
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="components/sprintStory.js"></script>
     <script src="components/sprintSection.js"></script>
@@ -46,24 +48,24 @@
 
         function dragEnter(ev) {
             if (ev.target.getAttribute("_allowsdrop")) {
-                ev.target.style.background = "#afafaf";
+                ev.target.classList.add('drop-area-highlight');
             }
         }
 
         function dragLeave(ev) {
             if (ev.target.getAttribute("_allowsdrop")) {
-                ev.target.style.background = "#fff";
+                ev.target.classList.remove('drop-area-highlight');
             }
         }
 
         function allowDrag(ev) {
             ev.preventDefault();
             if (ev.target.getAttribute("_allowsdrop")) {
-                ev.dataTransfer.dropEffect = "all"; // don't allow to drop there
+                ev.dataTransfer.dropEffect = "all"; // allow to drop there
                 console.log("drop allowed");
             }
             else {
-                ev.dataTransfer.dropEffect = "none"; // allow drop
+                ev.dataTransfer.dropEffect = "none"; // don't allow drop
                 console.log("drop not allowed");
             }
         }
@@ -71,9 +73,22 @@
         function drop(ev) {
             ev.preventDefault();
             let beging_dragged = document.getElementById(ev.dataTransfer.getData("text"));
-            ev.target.appendChild(beging_dragged);
-            ev.target.style.background = "#fff";
-            console.log(ev.screenX, ev.screenY);
+           
+            let drop_area_2_drag = null;
+            beging_dragged.setAttribute("_mark", true);
+            for (let i=0; i<beging_dragged.parentElement.childElementCount; i++) {
+                if (beging_dragged.parentElement.children[i].getAttribute('_mark')) {
+                    drop_area_2_drag = beging_dragged.parentElement.children[i-1];
+                    beging_dragged.removeAttribute("_mark");
+                    break;
+                }
+            }
+
+            // move the story along with droppable area just above it into new location
+            ev.target.parentElement.insertBefore(beging_dragged, ev.target);
+            ev.target.parentElement.insertBefore(drop_area_2_drag, beging_dragged);
+
+            ev.target.classList.remove('drop-area-highlight');
         }
 
     </script>

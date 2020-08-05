@@ -8,6 +8,14 @@
 }
 
 .drop-area {
-    height: 30px;
-    border: 2px solid yellow;
+    height: 20px;
+    margin-bottom: 10px;
+    /* background-color: transparent; */
+    /* border: 2px solid yellow; */
+}
+
+.drop-area-highlight {
+    border: 3px solid #b3b3b3;
+    border-style: dashed;
+    height: 150px;
 }
