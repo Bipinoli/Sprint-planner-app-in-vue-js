@@ -1,11 +1,14 @@
 Vue.component("sprint-story", {
-    props: ['urgency', 'assignee', 'number', 'description', 'points'],
+    props: ['urgency', 'assignee', 'number', 'title', 'points'],
     template: `
-    <div class="card sprint-story">
+    <div 
+    :id='id'
+    class="card sprint-story" draggable="true" ondragstart="dragStart(event)"
+    >
         <div class="urgency-meter"></div>
         <div class="sprint-content">
             <div class="sprint-title">
-                Engage Jupiter Express for cuter solar system travel
+                {{title}}
             </div>
             <div>
                 <div class="sprint-tag">
@@ -25,4 +28,10 @@ Vue.component("sprint-story", {
         
     </div>
     `,
+
+    data: function() {
+        return {
+            'id': 'draggable_' + String(Date.now()) + String(Math.floor(Math.random() * 100000000))
+        };
+    }
 });
