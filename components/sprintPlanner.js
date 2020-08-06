@@ -23,37 +23,45 @@ var backLog = [
 ];
 
 
-var sprintPlanner = new Vue({
-    el: '#sprint-planner',
-    data: {
-        'sections': [
-            {
-                'name': 'back-log',
-                'content': backLog,
-                'special-btn': true
-            },
-            {
-                'name': 'todo',
-                'content': backLog
-            },
-            {
-                'name': 'in-progress',
-                'content': backLog
-            },
-            {
-                'name': 'Ready For Acceptance',
-                'content': backLog
-            },
-            {
-                'name': 'Completed',
-                'content': backLog
-            },
-        ],
-        shouldAddStory: false,
+Vue.component('sprint-planner', {
+    template: `
+        <div id="sprint-planner" class="columns">
+            <template v-for="section in sections">
+                <sprint-section :title="section['name']" :stories="section['content']" :specialbtn="section['special-btn']" @add-story="addStory"></sprint-section>
+            </template>
+            <story-adder></story-adder>
+        </div>
+    `,
+    data: function() {
+        return {
+            'sections': [
+                {
+                    'name': 'back-log',
+                    'content': backLog,
+                    'special-btn': true
+                },
+                {
+                    'name': 'todo',
+                    'content': backLog
+                },
+                {
+                    'name': 'in-progress',
+                    'content': backLog
+                },
+                {
+                    'name': 'Ready For Acceptance',
+                    'content': backLog
+                },
+                {
+                    'name': 'Completed',
+                    'content': backLog
+                },
+            ],
+        };
     },
     methods: {
         addStory() {
-            this.shouldAddStory = true;
+            store.setShouldAddStoryAction(true);
         },
     }
 });

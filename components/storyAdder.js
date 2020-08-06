@@ -1,5 +1,4 @@
 Vue.component("story-adder", {
-    props: ['visible'],
     template: `
     <div class="modal" :class="{'is-active': modalVisible}">
         <div class="modal-background"></div>
@@ -72,7 +71,7 @@ Vue.component("story-adder", {
             points: null,
             number: null,
             assignee: null,
-            modalVisible: this.visible,
+            modalVisible: store.state.shouldAddStory,
         };
     },
     methods: {
@@ -86,6 +85,7 @@ Vue.component("story-adder", {
         cancel() {
             this.reset();
             this.modalVisible = false;
+            store.setShouldAddStoryAction(false);
         }
     },
 });
