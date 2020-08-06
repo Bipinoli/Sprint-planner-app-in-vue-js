@@ -48,6 +48,12 @@ var sprintPlanner = new Vue({
                 'name': 'Completed',
                 'content': backLog
             },
-        ]
+        ],
+        shouldAddStory: false,
     },
+    methods: {
+        addStory() {
+            this.shouldAddStory = true;
+        },
+    }
 });

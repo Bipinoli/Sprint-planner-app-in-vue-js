@@ -1,44 +1,58 @@
 Vue.component("story-adder", {
+    props: ['visible'],
     template: `
-    <div class="modal-2">
+    <div class="modal" :class="{'is-active': modalVisible}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Add new Story</p>
-                <button class="delete" aria-label="close"></button>
+                <button class="delete" @click="cancel" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
             
-                <div>
-                <textarea class="textarea" placeholder="Title"></textarea>
+                <div class="card-body-content">
+                    <textarea class="textarea" placeholder="Title" v-model="title"></textarea>
                 </div>
                 
-                <div class="select">
-                    <select name="urgency" id="_urgency">
-                    <option value="urgent">Urgent</option>
-                    <option value="important">Important</option>
-                    <option value="normal" selected>Normal</option>
-                    </select>
+                <div class="row card-body-content"">
+
+                    <div class="row">
+                        <p>Urgency</p>
+                        <div class="select">
+                            <select name="urgency" id="_urgency" v-model="urgency">
+                                <option value="urgent">Urgent</option>
+                                <option value="important">Important</option>
+                                <option value="normal" selected>Normal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p>Story Points</p>
+                        <div class="select">
+                            <select name="story-points" id="_story_points" v-model="points">
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                
                 </div>
 
-                <div>
-                    <input class="input" type="text" placeholder="Story Number">
-                </div>
 
-                <div class="select">
-                    <select name="story-points" id="_story_points">
-                    <option value="1">1</option>
-                    <option value="2" selected>2</option>
-                    <option value="3">3</option>
-                    </select>
-                </div>
+                <div class="card-body-content row">
+                    <div>
+                        <input class="input" type="text" placeholder="Story Number" v-model="number">
+                    </div>
 
-                <div>
-                    <p>Assign To</p>
-                    <div class="select">
-                        <select name="assignee" id="_assignee">
-                            <option value="ronald">Ronald</option>
-                        </select>
+                    <div class="row">
+                        <p>Assign To</p>
+                        <div class="select">
+                            <select name="assignee" id="_assignee" v-model="assignee">
+                                <option value="ronald">Ronald</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -46,9 +60,32 @@ Vue.component("story-adder", {
             </section>
             <footer class="modal-card-foot">
                 <button class="button is-success">Add</button>
-                <button class="button">Cancel</button>
+                <button class="button" @click="cancel">Cancel</button>
             </footer>
         </div>
     </div>
     `,
+    data: function() {
+        return {
+            title: null,
+            urgency: null,
+            points: null,
+            number: null,
+            assignee: null,
+            modalVisible: this.visible,
+        };
+    },
+    methods: {
+        reset() {
+            this.title = null;
+            this.urgency = null;
+            this.points = null;
+            this.number = null;
+            this.assignee = null;
+        },
+        cancel() {
+            this.reset();
+            this.modalVisible = false;
+        }
+    },
 });

@@ -5,13 +5,13 @@ Vue.component("sprint-story", {
     :id='id'
     class="card sprint-story" draggable="true" ondragstart="dragStart(event)"
     >
-        <div class="urgency-meter"></div>
+        <div class="urgency-meter urgency-urgent"></div>
         <div class="sprint-content">
             <div class="sprint-title">
                 {{title}}
             </div>
             <div>
-                <div class="sprint-tag">
+                <div class="sprint-tag tag-urgent">
                     Mars exploration
                 </div>
             </div>

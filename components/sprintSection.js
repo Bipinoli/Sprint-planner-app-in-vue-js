@@ -5,7 +5,7 @@ Vue.component("sprint-section", {
             <header class="card-header">
                     <div v-if="specialbtn" class="card-header-title sprint-section-title sprint-section-title-with-btn">
                         <p>{{title}}</p>
-                        <img v-if="specialbtn" src="img/hamburger.svg" width="26px"/>
+                        <img v-if="specialbtn" @click="addStory" src="img/hamburger.svg" width="26px"/>
                     </div>
                     <template v-else>
                         <p class="card-header-title sprint-section-title">{{title}}</p>
@@ -20,4 +20,9 @@ Vue.component("sprint-section", {
             </div>
         </div>
     `,
+    methods: {
+        addStory() {
+            this.$emit('add-story');
+        },
+    }
 });

@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sprintSection.css">
     <link rel="stylesheet" href="css/sprintStory.css">
+    <link rel="stylesheet" href="css/newStoryModal.css">
 
 
 </head>
 <body>
     <div id="sprint-planner" class="columns">
-        <!-- <template v-for="section in sections">
-            <sprint-section :title="section['name']" :stories="section['content']" :specialbtn="section['special-btn']"></sprint-section>
-        </template> -->
-        <story-adder></story-adder>
+        <template v-for="section in sections">
+            <sprint-section :title="section['name']" :stories="section['content']" :specialbtn="section['special-btn']" @add-story="addStory"></sprint-section>
+        </template>
+        <story-adder :visible="shouldAddStory"></story-adder>
     </div>
       
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

@@ -8,8 +8,19 @@
 
 .urgency-meter {
     width: 100%;
-    height: 6px;
-    background-color: red;   
+    height: 6px; 
+}
+
+.urgency-urgent {
+    background-color: red;  
+}
+
+.urgency-normal {
+    background-color: green;
+}
+
+.urgency-important {
+    background-color: yellow;
 }
 
 .sprint-metrics {
@@ -50,11 +61,22 @@
     margin-bottom: 10px;
     text-transform: uppercase;
     font-weight: bolder;
-    background-color: orange;
     padding: 4px;
     border-radius: 4px;
     font-size: small;
     width: fit-content;
+}
+
+.tag-urgent {
+    background-color: orange;
+}
+
+.tag-normal {
+    background-color: brown;
+}
+
+.tag-important {
+    background-color: blue;
 }
 
 .sprint-number {
