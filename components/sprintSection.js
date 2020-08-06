@@ -1,11 +1,15 @@
 Vue.component("sprint-section", {
-    props: ['title', 'stories'],
+    props: ['title', 'stories', 'specialbtn'],
     template: `
         <div class="sprint-section column card">
             <header class="card-header">
-                <p class="card-header-title sprint-section-title">
-                    {{title}}
-                </p>
+                    <div v-if="specialbtn" class="card-header-title sprint-section-title sprint-section-title-with-btn">
+                        <p>{{title}}</p>
+                        <img v-if="specialbtn" src="img/hamburger.svg" width="26px"/>
+                    </div>
+                    <template v-else>
+                        <p class="card-header-title sprint-section-title">{{title}}</p>
+                    </template>
             </header>
             <div class="card-content">
                <template v-for="story in stories">

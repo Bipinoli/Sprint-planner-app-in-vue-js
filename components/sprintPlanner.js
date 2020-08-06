@@ -29,7 +29,8 @@ var sprintPlanner = new Vue({
         'sections': [
             {
                 'name': 'back-log',
-                'content': backLog
+                'content': backLog,
+                'special-btn': true
             },
             {
                 'name': 'todo',
@@ -39,9 +40,14 @@ var sprintPlanner = new Vue({
                 'name': 'in-progress',
                 'content': backLog
             },
+            {
+                'name': 'Ready For Acceptance',
+                'content': backLog
+            },
+            {
+                'name': 'Completed',
+                'content': backLog
+            },
         ]
-       
-        // 'ready-4-acceptance': [],
-        // 'completed': [],
     },
 });

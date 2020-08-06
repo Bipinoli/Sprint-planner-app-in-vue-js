@@ -19,3 +19,13 @@
     border-style: dashed;
     height: 150px;
 }
+
+.sprint-section-title-with-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sprint-section-title-with-btn img:hover {
+    cursor: pointer;
+}

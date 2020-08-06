@@ -14,14 +14,15 @@
 </head>
 <body>
     <div id="sprint-planner" class="columns">
-        <template v-for="section in sections">
-            <sprint-section :title="section['name']" :stories="section['content']"></sprint-section>
-        </template>
-        <!-- <sprint-section title="back-log" :stories="backLog"></sprint-section> -->
+        <!-- <template v-for="section in sections">
+            <sprint-section :title="section['name']" :stories="section['content']" :specialbtn="section['special-btn']"></sprint-section>
+        </template> -->
+        <story-adder></story-adder>
     </div>
       
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="components/sprintStory.js"></script>
+    <script src="components/newStoryModal.js"></script>
     <script src="components/sprintSection.js"></script>
     <script src="components/sprintPlanner.js"></script>
 
@@ -43,7 +44,6 @@
         }
 
         function dragEnd(ev) {
-
         }
 
         function dragEnter(ev) {
