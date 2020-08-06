@@ -1,35 +1,10 @@
-var backLog = [
-    {
-        'urgency': 'normal',
-        'assignee': 'img/face2.jpg',
-        'number': '#MR-121',
-        'title': 'Study the atomospheric composition of Mars for possible settlement and agricultural innovation',
-        'points': 3
-    },
-    {
-        'urgency': 'urgent',
-        'assignee': 'img/face2.jpg',
-        'number': '#MR-122',
-        'title': 'Careful caracterization of gravitaional vortex in Mars and its satellite',
-        'points': 2
-    },
-    {
-        'urgency': 'medium',
-        'assignee': 'img/face2.jpg',
-        'number': '#MR-123',
-        'title': 'Final testing of Rover technology before ready to launch',
-        'points': 1
-    },
-];
-
-
 Vue.component('sprint-planner', {
     template: `
         <div id="sprint-planner" class="columns">
             <template v-for="section in sections">
-                <sprint-section :title="section['name']" :stories="section['content']" :specialbtn="section['special-btn']" @add-story="addStory"></sprint-section>
+                <sprint-section :title="section['name']" :stories="section['content']" :specialbtn="section['special-btn']" @add-story="addStoryAction"></sprint-section>
             </template>
-            <story-adder></story-adder>
+            <story-adder @new-story="newStory"></story-adder>
         </div>
     `,
     data: function() {
@@ -42,26 +17,30 @@ Vue.component('sprint-planner', {
                 },
                 {
                     'name': 'todo',
-                    'content': backLog
+                    'content': todo
                 },
                 {
                     'name': 'in-progress',
-                    'content': backLog
+                    'content': inProgress
                 },
                 {
                     'name': 'Ready For Acceptance',
-                    'content': backLog
+                    'content': rfa
                 },
                 {
                     'name': 'Completed',
-                    'content': backLog
+                    'content': completed
                 },
             ],
         };
     },
     methods: {
-        addStory() {
+        addStoryAction() {
             store.setShouldAddStoryAction(true);
         },
+        newStory(story) {
+            backLog.unshift(story);
+            store.setShouldAddStoryAction(false);
+        }
     }
 });

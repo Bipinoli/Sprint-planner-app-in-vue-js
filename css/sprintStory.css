@@ -12,15 +12,15 @@
 }
 
 .urgency-urgent {
-    background-color: red;  
+    background-color: #ED4041;  
 }
 
 .urgency-normal {
-    background-color: green;
+    background-color: #41ADF8;
 }
 
 .urgency-important {
-    background-color: yellow;
+    background-color: #F6C416;
 }
 
 .sprint-metrics {
@@ -68,15 +68,18 @@
 }
 
 .tag-urgent {
-    background-color: orange;
+    background-color: #F18100;
+    color: #fff;
 }
 
 .tag-normal {
-    background-color: brown;
+    background-color: #4FCBDF;
+    color: #fff;
 }
 
 .tag-important {
-    background-color: blue;
+    background-color: #6554C0;
+    color: #fff;
 }
 
 .sprint-number {

@@ -1,6 +1,6 @@
 Vue.component("story-adder", {
     template: `
-    <div class="modal" :class="{'is-active': modalVisible}">
+    <div class="modal" :class="{'is-active': visibilityState['shouldAddStory']}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -58,7 +58,7 @@ Vue.component("story-adder", {
 
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success">Add</button>
+                <button class="button is-success" @click="submit">Add</button>
                 <button class="button" @click="cancel">Cancel</button>
             </footer>
         </div>
@@ -71,7 +71,7 @@ Vue.component("story-adder", {
             points: null,
             number: null,
             assignee: null,
-            modalVisible: store.state.shouldAddStory,
+            visibilityState: store.state,
         };
     },
     methods: {
@@ -84,8 +84,16 @@ Vue.component("story-adder", {
         },
         cancel() {
             this.reset();
-            this.modalVisible = false;
             store.setShouldAddStoryAction(false);
+        },
+        submit() {
+            this.$emit("new-story", {
+                title: this.title,
+                urgency: this.urgency,
+                points: this.points,
+                number: this.number,
+                assignee: this.assignee
+            });
         }
     },
 });

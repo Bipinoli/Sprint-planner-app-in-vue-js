@@ -5,13 +5,13 @@ Vue.component("sprint-story", {
     :id='id'
     class="card sprint-story" draggable="true" ondragstart="dragStart(event)"
     >
-        <div class="urgency-meter urgency-urgent"></div>
+        <div class="urgency-meter" :class="urgencyClasses"></div>
         <div class="sprint-content">
             <div class="sprint-title">
                 {{title}}
             </div>
             <div>
-                <div class="sprint-tag tag-urgent">
+                <div class="sprint-tag" :class="tagClasses">
                     Mars exploration
                 </div>
             </div>
@@ -31,7 +31,17 @@ Vue.component("sprint-story", {
 
     data: function() {
         return {
-            'id': 'draggable_' + String(Date.now()) + String(Math.floor(Math.random() * 100000000))
+            'id': 'draggable_' + String(Date.now()) + String(Math.floor(Math.random() * 100000000)),
+            urgencyClasses: {
+                'urgency-urgent': this.urgency == 'urgent',
+                'urgency-important': this.urgency == 'important',
+                'urgency-normal': this.urgency == 'normal'
+            },
+            tagClasses: {
+                'tag-urgent': this.urgency == 'urgent',
+                'tag-important': this.urgency == 'important',
+                'tag-normal': this.urgency == 'normal'
+            }
         };
     }
 });
