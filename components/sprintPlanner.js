@@ -2,7 +2,10 @@ Vue.component('sprint-planner', {
     template: `
         <div id="sprint-planner" class="columns">
             <template v-for="section in sections">
-                <sprint-section :key="section['name']" :title="section['name']" :stories="section['content']" :specialbtn="section['special-btn']" @add-story="addStoryAction"></sprint-section>
+                <sprint-section :key="section['name']" :title="section['name']"
+                 :stories="contents[section['contentKey']]" :specialbtn="section['special-btn']"
+                 @add-story="addStoryAction"
+                ></sprint-section>
             </template>
             <story-adder @new-story="newStory"></story-adder>
         </div>
@@ -12,26 +15,27 @@ Vue.component('sprint-planner', {
             'sections': [
                 {   
                     'name': 'back-log',
-                    'content': backLog,
                     'special-btn': true,
+                    'contentKey': 'backLog',
                 },
                 {
                     'name': 'todo',
-                    'content': todo
+                    'contentKey': 'todo',
                 },
                 {
                     'name': 'in-progress',
-                    'content': inProgress
+                    'contentKey': 'inProgress',
                 },
                 {
                     'name': 'Ready For Acceptance',
-                    'content': rfa
+                    'contentKey': 'rfa',
                 },
                 {
                     'name': 'Completed',
-                    'content': completed
+                    'contentKey': 'completed',
                 },
             ],
+            'contents': store.state.db,
         };
     },
     methods: {
