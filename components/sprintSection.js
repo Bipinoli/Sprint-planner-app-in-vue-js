@@ -13,10 +13,10 @@ Vue.component("sprint-section", {
             </header>
             <div class="card-content">
                <template v-for="story in stories">
-               <div class="drop-area" :dragover="allowDrag" :drop="drop" _allowsdrop="true" :dragenter="dragEnter" :dragleave="dragLeave"></div>
+                    <div class="drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
                     <sprint-story :title="story['title']" :urgency="story['urgency']" :drag_start_func="dragStart"></sprint-story>
                </template>
-               <div class="drop-area" :dragover="allowDrag" :drop="drop" _allowsdrop="true" :dragenter="dragEnter" :dragleave="dragLeave"></div>
+               <div class="drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
             </div>
         </div>
     `,
@@ -36,7 +36,6 @@ Vue.component("sprint-section", {
         },
         
         dragEnter(ev) {
-            console.log("drag enter");
             if (ev.target.getAttribute("_allowsdrop")) {
                 ev.target.classList.add('drop-area-highlight');
             }
@@ -49,7 +48,6 @@ Vue.component("sprint-section", {
         },
         
         allowDrag(ev) {
-            console.log("allow drag");
             ev.preventDefault();
             if (ev.target.getAttribute("_allowsdrop")) {
                 ev.dataTransfer.dropEffect = "all"; // allow to drop there
