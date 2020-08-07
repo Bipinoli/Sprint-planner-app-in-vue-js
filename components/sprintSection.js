@@ -14,7 +14,7 @@ Vue.component("sprint-section", {
             <div class="card-content">
                <template v-for="story in stories">
                     <div class="drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
-                    <sprint-story :key="story['key']" :title="story['title']" :urgency="story['urgency']" :drag_start_func="dragStart"></sprint-story>
+                    <sprint-story :key="story['key']" :title="story['title']" :number="story['number']" :urgency="story['urgency']" :drag_start_func="dragStart"></sprint-story>
                </template>
                <div class="drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
             </div>
@@ -59,23 +59,46 @@ Vue.component("sprint-section", {
 
         drop(ev) {
             ev.preventDefault();
-            let beging_dragged = document.getElementById(ev.dataTransfer.getData("text"));
+            let being_dragged = document.getElementById(ev.dataTransfer.getData("text"));
            
-            let drop_area_2_drag = null;
-            beging_dragged.setAttribute("_mark", true);
-            for (let i=0; i<beging_dragged.parentElement.childElementCount; i++) {
-                if (beging_dragged.parentElement.children[i].getAttribute('_mark')) {
-                    drop_area_2_drag = beging_dragged.parentElement.children[i-1];
-                    beging_dragged.removeAttribute("_mark");
+            let indexBefore = this.whichChildOfParent(being_dragged);
+            let indexAfter = this.whichChildOfParent(ev.target);
+
+            let sectionBefore = this.identifySection(being_dragged);
+            let sectionAfter = this.identifySection(ev.target);
+            
+            // mutate store's state to reflect the transfer
+            store.transferStoryAction(sectionBefore, sectionAfter, indexBefore, indexAfter+1);
+            
+            ev.target.classList.remove('drop-area-highlight');
+        },
+
+        whichChildOfParent(elem) {
+            let index = -1;
+            elem.setAttribute("_mark", true);
+            for (let i=0; i<elem.parentElement.childElementCount; i++) {
+                let child = elem.parentElement.children[i];
+                if (child.classList.contains('sprint-story'))
+                    index += 1;
+                if (child.getAttribute('_mark')) {
+                    elem.removeAttribute("_mark");
                     break;
                 }
             }
+            return index;
+        },
 
-            // move the story along with droppable area just above it into new location
-            ev.target.parentElement.insertBefore(beging_dragged, ev.target);
-            ev.target.parentElement.insertBefore(drop_area_2_drag, beging_dragged);
+        identifySection(elem) {
+            // return key of the parentComponent to identify the story section
+            if ('__vue__' in elem) {
+                let parentComponent = elem.__vue__.$parent;
+                return parentComponent.$vnode.key;
+            }
 
-            ev.target.classList.remove('drop-area-highlight');
+            while ( !('__vue__' in elem) ) {
+                elem = elem.parentElement;
+            }
+            return elem.__vue__.$vnode.key;
         },
 
     }

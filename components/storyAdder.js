@@ -67,7 +67,7 @@ Vue.component("story-adder", {
     data: function() {
         return {
             title: null,
-            urgency: null,
+            urgency: 'normal',
             points: null,
             number: null,
             assignee: null,
@@ -77,7 +77,7 @@ Vue.component("story-adder", {
     methods: {
         reset() {
             this.title = null;
-            this.urgency = null;
+            this.urgency = 'normal';
             this.points = null;
             this.number = null;
             this.assignee = null;

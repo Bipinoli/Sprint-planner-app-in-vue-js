@@ -2,7 +2,7 @@ Vue.component('sprint-planner', {
     template: `
         <div id="sprint-planner" class="columns">
             <template v-for="section in sections">
-                <sprint-section :key="section['name']" :title="section['name']"
+                <sprint-section :key="section['contentKey']" :title="section['name']"
                  :stories="contents[section['contentKey']]" :specialbtn="section['special-btn']"
                  @add-story="addStoryAction"
                 ></sprint-section>

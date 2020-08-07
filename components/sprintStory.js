@@ -18,7 +18,8 @@ Vue.component("sprint-story", {
             <div class="sprint-metrics">
                 <div class="sprint-points">2</div>
                 <div class="sprint-num-assignee">
-                    <div class="sprint-number">#TAD-231</div>
+                    <div class="sprint-number" v-if="number">{{number}}</div>
+                    <div class="sprint-number" v-else>#TAD-231</div>
                     <div class="sprint-assignee">
                         <img src="img/face2.jpg">
                     </div>
