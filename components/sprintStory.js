@@ -3,6 +3,7 @@ Vue.component("sprint-story", {
     template: `
     <div 
     :id='id'
+    :key='id'
     class="card sprint-story" draggable="true" ondragstart="dragStart(event)"
     >
         <div class="urgency-meter" :class="urgencyClasses"></div>

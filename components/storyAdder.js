@@ -94,6 +94,7 @@ Vue.component("story-adder", {
                 number: this.number,
                 assignee: this.assignee
             });
+            this.cancel();
         }
     },
 });

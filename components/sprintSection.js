@@ -14,7 +14,7 @@ Vue.component("sprint-section", {
             <div class="card-content">
                <template v-for="story in stories">
                     <div class="drop-area" ondragover="allowDrag(event)" ondrop="drop(event)" _allowsdrop="true" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
-                    <sprint-story :title="story['title']" :urgency="story['urgency']"></sprint-story>
+                    <sprint-story :key="story['key']" :title="story['title']" :urgency="story['urgency']"></sprint-story>
                </template>
                <div class="drop-area" ondragover="allowDrag(event)" ondrop="drop(event)" _allowsdrop="true" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
             </div>
