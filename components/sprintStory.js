@@ -1,9 +1,10 @@
 Vue.component("sprint-story", {
-    props: ['urgency', 'assignee', 'number', 'title', 'points'],
+    props: ['urgency', 'assignee', 'number', 'title', 'points', 'drag_start_func'],
     template: `
     <div 
     :id='id'
-    class="card sprint-story" draggable="true" ondragstart="dragStart(event)"
+    :key='id'
+    class="card sprint-story" draggable="true" @dragstart="dragStart"
     >
         <div class="urgency-meter" :class="urgencyClasses"></div>
         <div class="sprint-content">
@@ -43,5 +44,11 @@ Vue.component("sprint-story", {
                 'tag-normal': this.urgency == 'normal'
             }
         };
+    },
+
+    methods: {
+        dragStart(ev) {
+            this.drag_start_func(ev);
+        }
     }
 });

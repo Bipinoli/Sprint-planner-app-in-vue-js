@@ -39,7 +39,7 @@ Vue.component('sprint-planner', {
             store.setShouldAddStoryAction(true);
         },
         newStory(story) {
-            backLog.unshift(story);
+            Vue.set(backLog, 0, story);
             store.setShouldAddStoryAction(false);
         }
     }
