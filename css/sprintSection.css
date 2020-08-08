@@ -7,6 +7,16 @@
     text-transform: uppercase;
 }
 
+.section-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.big-drop-area {
+    margin-bottom: 20px;
+}
+
 .drop-area {
     height: 20px;
     margin-bottom: 10px;
@@ -17,7 +27,16 @@
 .drop-area-highlight {
     border: 3px solid #b3b3b3;
     border-style: dashed;
-    height: 150px;
+    height: 200px;
+}
+
+.big-drop-area {
+    height: 100%;
+}
+
+.big-drop-area-highlight {
+    border: 3px solid #b3b3b3;
+    border-style: dashed;
 }
 
 .sprint-section-title-with-btn {

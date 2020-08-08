@@ -11,12 +11,14 @@ Vue.component("sprint-section", {
                         <p class="card-header-title sprint-section-title">{{title}}</p>
                     </template>
             </header>
-            <div class="card-content">
-               <template v-for="story in stories">
-                    <div class="drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
-                    <sprint-story :key="story['key']" :title="story['title']" :number="story['number']" :urgency="story['urgency']" :drag_start_func="dragStart"></sprint-story>
-               </template>
-               <div class="drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
+            <div class="card-content section-content">
+                <div class="section-inner">
+                    <template v-for="story in stories">
+                            <div class="drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
+                            <sprint-story :key="story['key']" :title="story['title']" :number="story['number']" :urgency="story['urgency']" :drag_start_func="dragStart"></sprint-story>
+                    </template>
+                </div>
+                <div class="big-drop-area" @dragover="allowDrag" @drop="drop" _allowsdrop="true" _bigdroparea="true" @dragenter="dragEnter" @dragleave="dragLeave"></div>
             </div>
         </div>
     `,
@@ -37,13 +39,19 @@ Vue.component("sprint-section", {
         
         dragEnter(ev) {
             if (ev.target.getAttribute("_allowsdrop")) {
-                ev.target.classList.add('drop-area-highlight');
+                if (ev.target.getAttribute("_bigdroparea"))
+                    ev.target.classList.add('big-drop-area-highlight');
+                else
+                    ev.target.classList.add('drop-area-highlight');
             }
         },
         
         dragLeave(ev) {
             if (ev.target.getAttribute("_allowsdrop")) {
-                ev.target.classList.remove('drop-area-highlight');
+                if (ev.target.getAttribute('_bigdroparea'))
+                    ev.target.classList.remove('big-drop-area-highlight');
+                else
+                    ev.target.classList.remove('drop-area-highlight');
             }
         },
         
@@ -71,6 +79,7 @@ Vue.component("sprint-section", {
             store.transferStoryAction(sectionBefore, sectionAfter, indexBefore, indexAfter+1);
             
             ev.target.classList.remove('drop-area-highlight');
+            ev.target.classList.remove('big-drop-area-highlight');
         },
 
         whichChildOfParent(elem) {
