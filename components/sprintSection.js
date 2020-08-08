@@ -38,34 +38,29 @@ Vue.component("sprint-section", {
         },
         
         dragEnter(ev) {
-            if (ev.target.getAttribute("_allowsdrop")) {
-                if (ev.target.getAttribute("_bigdroparea"))
-                    ev.target.classList.add('big-drop-area-highlight');
-                else
-                    ev.target.classList.add('drop-area-highlight');
-            }
+            if (ev.target.getAttribute("_bigdroparea"))
+                ev.target.classList.add('big-drop-area-highlight');
+            else
+                ev.target.classList.add('drop-area-highlight');
         },
         
         dragLeave(ev) {
-            if (ev.target.getAttribute("_allowsdrop")) {
-                if (ev.target.getAttribute('_bigdroparea'))
-                    ev.target.classList.remove('big-drop-area-highlight');
-                else
-                    ev.target.classList.remove('drop-area-highlight');
-            }
+            if (ev.target.getAttribute('_bigdroparea'))
+                ev.target.classList.remove('big-drop-area-highlight');
+            else
+                ev.target.classList.remove('drop-area-highlight');
         },
         
         allowDrag(ev) {
             ev.preventDefault();
-            if (ev.target.getAttribute("_allowsdrop")) {
-                ev.dataTransfer.dropEffect = "all"; // allow to drop there
-            }
-            else {
-                ev.dataTransfer.dropEffect = "none"; // don't allow drop
-            }
         },
 
         drop(ev) {
+            // by using Vue's data driven approach
+            // following code can be refactored so eliminate
+            // need of manually traversing DOM tree
+            // but for now I am too lazy to refactor this
+
             ev.preventDefault();
             let being_dragged = document.getElementById(ev.dataTransfer.getData("text"));
            
@@ -98,6 +93,13 @@ Vue.component("sprint-section", {
         },
 
         identifySection(elem) {
+            // I coded this after researching the inner working of VueJS
+            // but
+            // it will be better to refactor this method 
+            // to be independent of inner working of VueJS
+            // so that it won't break when some thing inside of 
+            // vue changes
+
             // return key of the parentComponent to identify the story section
             if ('__vue__' in elem) {
                 let parentComponent = elem.__vue__.$parent;
